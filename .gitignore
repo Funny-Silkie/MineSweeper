@@ -1,0 +1,359 @@
+## Visual Studioの一時ファイルを無視し、結果をビルドし、
+一般的なVisual Studioアドオンによって生成された##ファイル。
+##
+## https://github.com/github/gitignore/blob/master/VisualStudio.gitignoreから最新情報を入手
+
+＃ユーザー固有のファイル
+* .rsuser
+* .suo
+*。ユーザー
+* .userosscache
+* .sln.docstates
+
+＃ユーザー固有のファイル（MonoDevelop / Xamarin Studio）
+* .userprefs
+
+＃モノ自動生成ファイル
+mono_crash。*
+
+＃ビルド結果
+[Dd] ebug /
+[Dd] ebugPublic /
+[Rr] elease /
+[Rr] eleases /
+x64 /
+x86 /
+[Aa] [Rr] [Mm] /
+[Aa] [Rr] [Mm] 64 /
+bld /
+[Bb] in /
+[Oo] bj /
+[Ll] og /
+
+＃Visual Studio 2015/2017 cache / optionsディレクトリ
+.vs /
+＃wwwrootにプロジェクトの静的ファイルを作成するタスクがある場合はコメント解除します
+＃wwwroot /
+
+＃Visual Studio 2017自動生成ファイル
+Generated \ Files /
+
+＃MSTestテスト結果
+[Tt] est [Rr] esult * /
+[Bb] uild [Ll] og。*
+
+＃NUnit
+* .VisualState.xml
+TestResult.xml
+nunit-*。xml
+
+＃ATLプロジェクトのビルド結果
+[Dd] ebugPS /
+[Rr] eleasePS /
+dlldata.c
+
+＃ベンチマーク結果
+BenchmarkDotNet.Artifacts /
+
+＃.NET Core
+project.lock.json
+project.fragment.lock.json
+アーティファクト/
+
+＃StyleCop
+StyleCopReport.xml
+
+＃Visual Studioによって構築されたファイル
+*_IC
+* _p.c
+* _h.h
+* .ilk
+* .meta
+* .obj
+* .iobj
+* .pch
+* .pdb
+* .ipdb
+* .pgc
+* .pgd
+* .rsp
+* .sbr
+* .tlb
+* .tli
+* .tlh
+* .tmp
+* .tmp_proj
+* _wpftmp.csproj
+*。ログ
+* .vspscc
+* .vssscc
+.builds
+* .pidb
+* .svclog
+* .scc
+
+＃Chutzpahテストファイル
+_Chutzpah *
+
+＃Visual C ++キャッシュファイル
+ipch /
+* .aps
+* .ncb
+* .opendb
+* .opensdf
+* .sdf
+* .cachefile
+* .VC.db
+* .VC.VC.opendb
+
+＃Visual Studioプロファイラー
+* .psess
+* .vsp
+* .vspx
+* .sap
+
+＃Visual Studioのトレースファイル
+* .e2e
+
+＃TFS 2012ローカルワークスペース
+$ tf /
+
+＃ガイダンス自動化ツールキット
+* .gpState
+
+＃ReSharperは.NETコーディングアドインです
+_ReSharper * /
+*。[Rr] e [Ss] harper
+* .DotSettings.user
+
+＃JustCodeは.NETコーディングアドインです
+.JustCode
+
+＃TeamCityはビルドアドインです
+_TeamCity *
+
+＃DotCoverはコードカバレッジツールです
+* .dotCover
+
+＃AxoCoverはコードカバレッジツールです
+.axoCover / *
+！.axoCover / settings.json
+
+＃Visual Studioコードカバレッジの結果
+*。カバレッジ
+* .coveragexml
+
+＃NCrunch
+_NCrunch_ *
+。* crunch * .local.xml
+nCrunchTemp_ *
+
+＃MightyMoose
+* .mm。*
+AutoTest.Net/
+
+＃Webワークベンチ（sass）
+.sass-cache /
+
+＃Installshield出力フォルダー
+[Ee] xpress /
+
+＃DocProjectはドキュメントジェネレーターアドインです
+DocProject / buildhelp /
+DocProject / Help / *。HxT
+DocProject / Help / *。HxC
+DocProject / Help / *。hhc
+DocProject / Help / *。hhk
+DocProject / Help / *。hhp
+DocProject / Help / Html2
+DocProject / Help / html
+
+＃Click-Onceディレクトリ
+公開/
+
+＃Web出力の公開
+*。[Pp] ublish.xml
+* .azurePubxml
+＃注：Webデプロイ設定をチェックインする場合は、次の行をコメント化します。
+＃ただし、データベース接続文字列（潜在的なパスワードを含む）は暗号化されません
+* .pubxml
+* .publishproj
+
+＃Microsoft Azure Webアプリの公開設定。必要に応じて次の行をコメントします
+＃Azure Webアプリの公開設定をチェックインしますが、機密情報が含まれています
+＃これらのスクリプトでは暗号化されません
+PublishScripts /
+
+＃NuGetパッケージ
+* .nupkg
+＃NuGetシンボルパッケージ
+* .snupkg
+＃パッケージの復元のため、パッケージフォルダーは無視できます
+** / [Pp] ackages / *
+＃MSBuildターゲットとして使用されるbuild /を除く。
+！** / [Pp] ackages / build /
+＃必要に応じてコメント解除しますが、通常は必要に応じて再生成されます
+＃！** / [Pp] ackages / repositories.config
+＃NuGet v3のproject.jsonファイルは、より無視可能なファイルを生成します
+* .nuget.props
+* .nuget.targets
+
+＃Microsoft Azureビルド出力
+csx /
+* .build.csdef
+
+＃Microsoft Azure Emulator
+ecf /
+rcf /
+
+＃Windowsストアアプリパッケージのディレクトリとファイル
+AppPackages /
+BundleArtifacts /
+Package.StoreAssociation.xml
+_pkginfo.txt
+* .appx
+* .appxbundle
+* .appxupload
+
+＃Visual Studioキャッシュファイル
+＃.cacheで終わるファイルは無視できます
+*。[Cc] ache
+＃ただし、.cacheで終わるディレクトリを追跡する
+！？*。[Cc] ache /
+
+＃その他
+ClientBin /
+〜$ *
+*〜
+* .dbmdl
+* .dbproj.schemaview
+* .jfm
+* .pfx
+* .publishsettings
+orleans.codegen.cs
+
+＃厳密な名前のファイルを含めると、セキュリティ上のリスクが生じる可能性があります
+＃（https://github.com/github/gitignore/pull/2483#issue-259490424）
+＃*。snk
+
+＃複数のワークフローがあるため、bower_componentsを無視するには次の行のコメントを外します
+＃（https://github.com/github/gitignore/pull/1529#issuecomment-104372622）
+＃bower_components /
+
+＃RIA / Silverlightプロジェクト
+Generated_Code /
+
+＃古いプロジェクトファイルの変換によるファイルのバックアップとレポート
+＃新しいVisual Studioバージョンに。バックアップファイルは必要ありませんが、
+＃gitがあるので;-)
+_UpgradeReport_Files /
+バックアップ*/
+UpgradeLog * .XML
+UpgradeLog * .htm
+ServiceFabricBackup /
+* .rptproj.bak
+
+＃SQL Serverファイル
+* .mdf
+* .ldf
+* .ndf
+
+＃ビジネスインテリジェンスプロジェクト
+* .rdl.data
+* .bim.layout
+* .bim _ *。settings
+* .rptproj.rsuser
+*-[Bb] ackup.rdl
+*-[Bb] ackup（[0-9]）。rdl
+*-[Bb] ackup（[0-9] [0-9]）。rdl
+
+＃Microsoft偽物
+FakesAssemblies /
+
+＃GhostDocプラグイン設定ファイル
+* .GhostDoc.xml
+
+＃Visual Studio用Node.jsツール
+.ntvs_analysis.dat
+node_modules /
+
+＃Visual Studio 6ビルドログ
+* .plg
+
+＃Visual Studio 6ワークスペースオプションファイル
+* .opt
+
+＃Visual Studio 6で自動生成されたワークスペースファイル（開いていたファイルなどが含まれています）
+* .vbw
+
+＃Visual Studio LightSwitchビルド出力
+** / *。HTMLClient / GeneratedArtifacts
+** / *。DesktopClient / GeneratedArtifacts
+** / *。DesktopClient / ModelManifest.xml
+** / *。Server / GeneratedArtifacts
+** / *。Server / ModelManifest.xml
+_Pvt_Extensions
+
+＃Paket依存関係マネージャー
+.paket / paket.exe
+paket-files /
+
+＃FAKE-F＃Make
+。偽/
+
+＃CodeRushの個人設定
+.cr /個人
+
+＃Visual Studio用のPythonツール（PTVS）
+__pycache __ /
+* .pyc
+
+＃Cake-使用している場合はコメント解除する
+＃ツール/ **
+＃！tools / packages.config
+
+＃Tabs Studio
+* .tss
+
+＃TelerikのJustMock構成ファイル
+* .jmconfig
+
+＃BizTalkビルド出力
+* .btp.cs
+* .btm.cs
+* .odx.cs
+* .xsd.cs
+
+＃OpenCover UI分析結果
+OpenCover /
+
+＃Azure Stream Analyticsのローカル実行出力
+ASALocalRun /
+
+＃MSBuildバイナリおよび構造化ログ
+* .binlog
+
+＃NVidia Nsight GPUデバッガー構成ファイル
+* .nvuser
+
+＃MFractors（Xamarin生産性ツール）作業フォルダー
+.mfractor /
+
+＃Visual Studioのローカル履歴
+.localhistory /
+
+＃BeatPulseヘルスチェック一時データベース
+healthchecksdb
+
+＃Visual Studio 2017のパッケージリファレンス変換ツールのバックアップフォルダー
+MigrationBackup /
+
+＃Ionide（クロスプラットフォームF＃VS Codeツール）作業フォルダー
+.ionide /
+
+.vs
+MineSweeper/obj/*
+MineSweeper/bin/*
+*.dll
+*.dylib
+*.xml
