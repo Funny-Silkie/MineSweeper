@@ -45,6 +45,8 @@ namespace MineSweeper
         {
             if (LeftClicked)
                 OnLeftClicked();
+            if (RightClicked)
+                OnRightClicked();
         }
     }
     /// <summary>

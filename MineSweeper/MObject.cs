@@ -116,11 +116,14 @@ namespace MineSweeper
         }
         public override void OnLeftClicked()
         {
-            //テクスチャ変更
-            Texture = Textures["Bomb"];
-            IsShown = true;
-            var scene = (GameScene)Layer.Scene;
-            scene.IsGameOver = true;
+            if (!IsFragged)
+            {
+                //テクスチャ変更
+                Texture = Textures["Bomb"];
+                IsShown = true;
+                var scene = (GameScene)Layer.Scene;
+                scene.IsGameOver = true;
+            }
         }
         protected override void OnRightClicked()
         {
@@ -151,12 +154,15 @@ namespace MineSweeper
         }
         public override void OnLeftClicked()
         {
-            noDetected = true;
-            if (mines == 0)
-                BundleBreak();
-            //文字を追加し自身を削除
-            Layer.AddObject(new Character(CellPosition));
-            Dispose();
+            if (!IsFragged)
+            {
+                noDetected = true;
+                if (mines == 0)
+                    BundleBreak();
+                //文字を追加し自身を削除
+                Layer.AddObject(new Character(CellPosition));
+                Dispose();
+            }
         }
         /// <summary>
         /// 一括破壊するメソッド

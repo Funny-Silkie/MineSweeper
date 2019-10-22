@@ -27,7 +27,7 @@ namespace MineSweeper
             get => _go;
             set
             {
-                if (!IsClear && value)
+                if (!IsClear && value && !IsGameOver)
                     uiLayer.AddObject(gameoverText); 
                 _go = value;
             }
