@@ -8,12 +8,27 @@ using fslib;
 
 namespace MineSweeper
 {
-    public static class Base
+    /// <summary>
+    /// データの保管等
+    /// </summary>
+    static class Base
     {
+        public static Font Font { get; } = Engine.Graphics.CreateDynamicFont("Resources/NotoSerifCJKjp-Medium.otf", 30, new ColorDefault(ColorSet.White).AsdColor, 1, new ColorDefault(ColorSet.Black).AsdColor);
+        /// <summary>
+        /// テクスチャを保管しておくディクショナリ
+        /// </summary>
         public static Dictionary<string, Texture2D> Textures { get; } = new Dictionary<string, Texture2D>();
-        public const int CellSize = 32;
+        /// <summary>
+        /// マスの大きさ
+        /// </summary>
+        public static int CellSize { get; } = 32;
+        /// <summary>
+        /// ファイルからテクスチャを読み込む。
+        /// </summary>
+        /// <param name="filename">読み込むファイル名</param>
         public static void GetTextures(string filename)
         {
+            //指定したファイルを読み込み行ごとで区切ったのちに更に分割
             var str = FileReader.CsvToCollectionS(filename, ',');
             foreach (var s in str)
             {
