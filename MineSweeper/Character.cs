@@ -10,9 +10,47 @@ using static MineSweeper.Base;
 namespace MineSweeper
 {
     /// <summary>
+    /// クリックして反応のあるテキストオブジェクトの抽象クラス
+    /// </summary>
+    abstract class ClickableText : TextObject2D
+    {
+        public abstract bool MouseCollide { get; }
+        /// <summary>
+        /// 左クリックされているか
+        /// </summary>
+        public bool LeftClicked => MouseCollide && Engine.Mouse.LeftButton.ButtonState == ButtonState.Push;
+        /// <summary>
+        /// 右クリックされているか
+        /// </summary>
+        public bool RightClicked => MouseCollide && Engine.Mouse.RightButton.ButtonState == ButtonState.Push;
+        /// <summary>
+        /// マウスと被っているかを返す
+        /// </summary>
+        protected bool IsCollide(int sizeX ,int sizeY)
+        {
+            var pos = Engine.Mouse.Position;
+            var x = Position.X <= pos.X && pos.X <= Position.X + sizeX;
+            var y = Position.Y <= pos.Y && pos.Y <= Position.Y + sizeY;
+            return x && y;
+        }
+        /// <summary>
+        /// 左クリックされたときに実行
+        /// </summary>
+        protected virtual void OnLeftClicked() { }
+        /// <summary>
+        /// 右クリックされたときに実行
+        /// </summary>
+        protected virtual void OnRightClicked() { }
+        protected override void OnUpdate()
+        {
+            if (LeftClicked)
+                OnLeftClicked();
+        }
+    }
+    /// <summary>
     /// 壁を壊した後に出てくる数字
     /// </summary>
-    class Character : TextObject2D
+    class Character : ClickableText
     {
         /// <summary>
         /// セルとしての座標
@@ -25,11 +63,7 @@ namespace MineSweeper
         /// <summary>
         /// マウスが自身と被っているか
         /// </summary>
-        public bool MouseCollide => IsCollide();
-        /// <summary>
-        /// 左クリックされているか
-        /// </summary>
-        public bool LeftClicked => MouseCollide && Engine.Mouse.LeftButton.ButtonState == ButtonState.Push;
+        public override bool MouseCollide => IsCollide(CellSize, CellSize);
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -49,15 +83,16 @@ namespace MineSweeper
             Text = Mines == 0 ? "" : Mines.ToString();
             Color = ColorDetermination(Mines);
         }
-        /// <summary>
-        /// マウスと被っているかを返す
-        /// </summary>
-        private bool IsCollide()
+        protected override void OnLeftClicked()
         {
-            var pos = Engine.Mouse.Position;
-            var x = Position.X <= pos.X && pos.X <= Position.X + CellSize;
-            var y = Position.Y <= pos.Y && pos.Y <= Position.Y + CellSize;
-            return x && y;
+            //周囲の壁と爆弾を取得
+            var objs = Layer.Objects.OfType<MObject>().Where(x => Math.Abs(x.CellPosition.X - CellPosition.X) <= 1 && Math.Abs(x.CellPosition.Y - CellPosition.Y) <= 1);
+            if (objs.Count(x => x.IsFragged) >= Mines)
+            {
+                foreach (var o in objs)
+                    if (!o.IsFragged)
+                        o.OnLeftClicked();
+            }
         }
         /// <summary>
         /// 数字に合わせて色を決定する

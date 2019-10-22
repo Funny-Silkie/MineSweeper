@@ -13,7 +13,14 @@ namespace MineSweeper
     /// </summary>
     static class Base
     {
+        /// <summary>
+        /// 文字用のフォント
+        /// </summary>
         public static Font Font { get; } = Engine.Graphics.CreateDynamicFont("Resources/NotoSerifCJKjp-Medium.otf", 30, new ColorDefault(ColorSet.White).AsdColor, 1, new ColorDefault(ColorSet.Black).AsdColor);
+        /// <summary>
+        /// 大きいフォント
+        /// </summary>
+        public static Font BigFont { get; } = Engine.Graphics.CreateDynamicFont("Resources/NotoSerifCJKjp-Medium.otf", 50, new ColorDefault(ColorSet.White).AsdColor, 2, new ColorDefault(ColorSet.Black).AsdColor);
         /// <summary>
         /// テクスチャを保管しておくディクショナリ
         /// </summary>

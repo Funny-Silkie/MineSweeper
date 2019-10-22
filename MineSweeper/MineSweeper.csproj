@@ -74,6 +74,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base.cs" />
+    <Compile Include="Character.cs" />
+    <Compile Include="Difficulties.cs" />
     <Compile Include="GameScene.cs" />
     <Compile Include="MObject.cs" />
     <Compile Include="Program.cs" />
