@@ -4,12 +4,13 @@ namespace MineSweeper
 {
     public class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
             //Altseedの初期化
             Engine.Initialize("MineSweeper", 1280, 960, new EngineOption());
+            Engine.File.AddRootPackageWithPassword("Resources.pack", "2236");
             //テクスチャの読み込み
-            Base.GetTextures("Resources/Textures.txt");
+            Base.GetTextures("Textures.fstxt");
             //シーン推移
             Engine.ChangeScene(new GameScene());
             //Altseedの更新

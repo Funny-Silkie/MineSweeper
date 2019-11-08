@@ -12,11 +12,11 @@ namespace MineSweeper
         /// <summary>
         /// 文字用のフォント
         /// </summary>
-        public static Font Font { get; } = Engine.Graphics.CreateDynamicFont("Resources/NotoSerifCJKjp-Medium.otf", 30, new ColorDefault(ColorSet.White).AsdColor, 1, new ColorDefault(ColorSet.Black).AsdColor);
+        public static Font Font { get; } = Engine.Graphics.CreateDynamicFont("NotoSerifCJKjp-Medium.otf", 30, new ColorDefault(ColorSet.White).AsdColor, 1, new ColorDefault(ColorSet.Black).AsdColor);
         /// <summary>
         /// 大きいフォント
         /// </summary>
-        public static Font BigFont { get; } = Engine.Graphics.CreateDynamicFont("Resources/NotoSerifCJKjp-Medium.otf", 50, new ColorDefault(ColorSet.White).AsdColor, 2, new ColorDefault(ColorSet.Black).AsdColor);
+        public static Font BigFont { get; } = Engine.Graphics.CreateDynamicFont("NotoSerifCJKjp-Medium.otf", 50, new ColorDefault(ColorSet.White).AsdColor, 2, new ColorDefault(ColorSet.Black).AsdColor);
         /// <summary>
         /// テクスチャを保管しておくディクショナリ
         /// </summary>
@@ -32,12 +32,12 @@ namespace MineSweeper
         public static void GetTextures(string filename)
         {
             //指定したファイルを読み込み行ごとで区切ったのちに更に分割
-            var str = FileReader.CsvToCollectionS(filename, ',');
+            var str = IOHandler.CsvToCollectionS(filename, new EncodeOption(EncodingType.UTF8), ',');
             foreach (var s in str)
             {
                 foreach (var t in s)
                     t.Trim();
-                Textures.Add(s[0], Engine.Graphics.CreateTexture2D("Resources/" + s[1]));
+                Textures.Add(s[0], Engine.Graphics.CreateTexture2D("" + s[1]));
             }
         }
     }

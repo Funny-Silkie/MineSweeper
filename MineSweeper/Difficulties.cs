@@ -23,10 +23,6 @@ namespace MineSweeper
         /// </summary>
         public Dif ReturnDif { get; }
         /// <summary>
-        /// マウスと被っているかどうか
-        /// </summary>
-        public override bool MouseCollide => IsCollide(320, 50);
-        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="position">座標</param>
@@ -39,20 +35,29 @@ namespace MineSweeper
             Position = position;
             Text = text;
         }
-        protected override void OnLeftClicked()
+        public override void OnLeftPushed()
         {
             var scene = (GameScene)Layer.Scene;
             scene.Difficulty = ReturnDif;
         }
-        protected override void OnRightClicked() => OnLeftClicked();
         protected override void OnUpdate()
         {
             var scene = (GameScene)Layer.Scene;
             base.OnUpdate();
-            if (ReturnDif == scene.Difficulty)
-                Color = new ColorDefault(ColorSet.Green).AsdColor;
-            else
-                Color = new ColorDefault(ColorSet.White).AsdColor;
+            Color = ReturnDif == scene.Difficulty ? new ColorDefault(ColorSet.Green) : new ColorDefault(ColorSet.White);
+        }
+    }
+    class ResetText : ClickableText
+    {
+        public ResetText(Vector2DF position) : base(BigFont, "Reset", position) { }
+        public override void OnLeftPushed()
+        {
+            Color = new ColorDefault(ColorSet.Red);
+            ((GameScene)Layer.Scene).MakeFloor();
+        }
+        public override void OnLeftReleased()
+        {
+            Color = new ColorDefault(ColorSet.White);
         }
     }
 }

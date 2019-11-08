@@ -7,46 +7,6 @@ using static MineSweeper.Base;
 namespace MineSweeper
 {
     /// <summary>
-    /// クリックして反応のあるテキストオブジェクトの抽象クラス
-    /// </summary>
-    abstract class ClickableText : TextObject2D
-    {
-        public abstract bool MouseCollide { get; }
-        /// <summary>
-        /// 左クリックされているか
-        /// </summary>
-        public bool LeftClicked => MouseCollide && Engine.Mouse.LeftButton.ButtonState == ButtonState.Push;
-        /// <summary>
-        /// 右クリックされているか
-        /// </summary>
-        public bool RightClicked => MouseCollide && Engine.Mouse.RightButton.ButtonState == ButtonState.Push;
-        /// <summary>
-        /// マウスと被っているかを返す
-        /// </summary>
-        protected bool IsCollide(int sizeX ,int sizeY)
-        {
-            var pos = Engine.Mouse.Position;
-            var x = Position.X <= pos.X && pos.X <= Position.X + sizeX;
-            var y = Position.Y <= pos.Y && pos.Y <= Position.Y + sizeY;
-            return x && y;
-        }
-        /// <summary>
-        /// 左クリックされたときに実行
-        /// </summary>
-        protected virtual void OnLeftClicked() { }
-        /// <summary>
-        /// 右クリックされたときに実行
-        /// </summary>
-        protected virtual void OnRightClicked() { }
-        protected override void OnUpdate()
-        {
-            if (LeftClicked)
-                OnLeftClicked();
-            if (RightClicked)
-                OnRightClicked();
-        }
-    }
-    /// <summary>
     /// 壁を壊した後に出てくる数字
     /// </summary>
     class Character : ClickableText
@@ -59,10 +19,6 @@ namespace MineSweeper
         /// 周囲の爆弾の数
         /// </summary>
         public byte Mines { get; private set; }
-        /// <summary>
-        /// マウスが自身と被っているか
-        /// </summary>
-        public override bool MouseCollide => IsCollide(CellSize, CellSize);
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -82,7 +38,7 @@ namespace MineSweeper
             Text = Mines == 0 ? "" : Mines.ToString();
             Color = ColorDetermination(Mines);
         }
-        protected override void OnLeftClicked()
+        public override void OnLeftPushed()
         {
             //周囲の壁と爆弾を取得
             var objs = Layer.Objects.OfType<MObject>().Where(x => Math.Abs(x.CellPosition.X - CellPosition.X) <= 1 && Math.Abs(x.CellPosition.Y - CellPosition.Y) <= 1);

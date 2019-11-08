@@ -120,6 +120,8 @@ namespace MineSweeper
                 Texture = Textures["Bomb"];
                 IsShown = true;
                 var scene = (GameScene)Layer.Scene;
+                foreach (var b in scene.MainLayer.Objects)
+                    if (b is Mine bomb) bomb.Texture = Textures["Bomb"];
                 scene.IsGameOver = true;
             }
         }

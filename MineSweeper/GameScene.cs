@@ -49,9 +49,9 @@ namespace MineSweeper
         }
         private bool _clear = false;
         //爆弾の数を表示
-        private readonly AllmightyText t_mines = new AllmightyText(new Vector2DF(980, 500), "Mines:50") { Font = BigFont };
+        private readonly AllmightyText t_mines = new AllmightyText(new Vector2DF(980, 570), "Mines:50") { Font = BigFont };
         //旗の数を表示
-        private readonly AllmightyText t_frags = new AllmightyText(new Vector2DF(1000, 580), "Frags:0") { Font = BigFont };
+        private readonly AllmightyText t_frags = new AllmightyText(new Vector2DF(1000, 650), "Frags:0") { Font = BigFont };
         //難易度を表す文字を表示
         private readonly Difficulties t_easy = new Difficulties(new Vector2DF(1050, 200), "Easy", Dif.Easy);
         private readonly Difficulties t_normal = new Difficulties(new Vector2DF(1000, 270), "Normal", Dif.Normal);
@@ -59,6 +59,8 @@ namespace MineSweeper
         //ゲームオーバーテキスト
         private readonly AllmightyText gameoverText = new AllmightyText(new Vector2DF(1030, 30), "Game\n Over") { Font = BigFont };
         private readonly AllmightyText clearText = new AllmightyText(new Vector2DF(1050, 30), "Clear") { Font = BigFont };
+        //再生成テキスト
+        private readonly ResetText resetText = new ResetText(new Vector2DF(1040, 450));
         //地雷の個数
         private byte Mines => (byte)((int)Difficulty * 100 - 50);
         //横のマスの数
@@ -68,7 +70,7 @@ namespace MineSweeper
         //乱数
         private readonly Random random = new Random(DateTime.Now.Second);
         //メインとなるレイヤー
-        private readonly Layer2D mainLayer = new Layer2D();
+        internal Layer2D MainLayer { get; } = new Layer2D();
         //背景を追加するレイヤー
         private readonly Layer2D backLayer = new Layer2D();
         //UIを表示するレイヤー
@@ -82,8 +84,8 @@ namespace MineSweeper
                 Texture = Textures["Back"],
                 Scale = new Vector2DF(sizeX * CellSize, sizeY * CellSize)
             });
-            AddLayer(mainLayer);
-            MakeFloor(mainLayer);
+            AddLayer(MainLayer);
+            MakeFloor();
             uiLayer.DrawingPriority += 10;
             AddLayer(uiLayer);
             uiLayer.AddObject(t_easy);
@@ -91,31 +93,32 @@ namespace MineSweeper
             uiLayer.AddObject(t_hard);
             uiLayer.AddObject(t_mines);
             uiLayer.AddObject(t_frags);
+            uiLayer.AddObject(resetText);
         }
         protected override void OnUpdated()
         {
             //Rキーでオブジェクト再配置
             if (Engine.Keyboard.GetKeyState(Keys.R) == ButtonState.Push)
-                MakeFloor(mainLayer);
+                MakeFloor();
             //壁を全て壊したらクリア
-            if (!IsClear && mainLayer.Objects.OfType<Wall>().Count() == 0 && count > 0)
+            if (!IsClear && MainLayer.Objects.OfType<Wall>().Count() == 0 && count > 0)
             {
                 IsClear = true;
-                foreach (var m in mainLayer.Objects.OfType<Mine>())
+                foreach (var m in MainLayer.Objects.OfType<Mine>())
                     m.IsFragged = true;
             }
             if (gameoverText.Layer != null)
                 uiLayer.DrawSpriteAdditionally(new Vector2DF(1010, 20), new Vector2DF(1220, 20), new Vector2DF(1220, 200), new Vector2DF(1010, 200), new Color(255, 255, 0), new Color(255, 255, 0), new Color(255, 255, 0), new Color(255, 255, 0), new Vector2DF(), new Vector2DF(), new Vector2DF(), new Vector2DF(), Textures["Back"], AlphaBlendMode.Add, -1);
             if (clearText.Layer != null)
                 uiLayer.DrawSpriteAdditionally(new Vector2DF(1010, 30), new Vector2DF(1250, 30), new Vector2DF(1250, 110), new Vector2DF(1010, 110), new Color(100, 255, 100), new Color(100, 255, 100), new Color(100, 255, 100), new Color(100, 255, 100), new Vector2DF(), new Vector2DF(), new Vector2DF(), new Vector2DF(), Textures["Back"], AlphaBlendMode.Add, -1);
-            t_frags.Text = "Frags:" + mainLayer.Objects.OfType<MObject>().Count(x => x.IsFragged);
+            t_frags.Text = "Frags:" + MainLayer.Objects.OfType<MObject>().Count(x => x.IsFragged);
             count++;
         }
         /// <summary>
         /// 各種オブジェクトの配置を行うメソッド
         /// </summary>
         /// <param name="layer">オブジェクトを配置するレイヤー</param>
-        private void MakeFloor(Layer2D layer)
+        internal void MakeFloor()
         {
             t_mines.Text = "Mines:" + Mines.ToString();
             if (gameoverText.Layer != null)
@@ -123,7 +126,7 @@ namespace MineSweeper
             if (clearText.Layer != null)
                 uiLayer.RemoveObject(clearText);
             IsGameOver = false;
-            mainLayer.Clear();
+            MainLayer.Clear();
             Mine.Positions.Clear();
             var list = new List<Wall>();
             //壁の仮登録
@@ -142,14 +145,14 @@ namespace MineSweeper
                 {
                     var obj = list.Single(x => x.CellPosition == vec);
                     list.Remove(obj);
-                    layer.AddObject(new Mine(vec));
+                    MainLayer.AddObject(new Mine(vec));
                 }
                 else
                     goto CheckPoint;
             }
             //残った壁をレイヤーに登録
             foreach (var w in list)
-                layer.AddObject(w);
+                MainLayer.AddObject(w);
             IsClear = false;
             count = 0;
         }
