@@ -51,7 +51,7 @@ namespace MineSweeper
         //爆弾の数を表示
         private readonly AllmightyText t_mines = new AllmightyText(new Vector2DF(980, 570), "Mines:50") { Font = BigFont };
         //旗の数を表示
-        private readonly AllmightyText t_frags = new AllmightyText(new Vector2DF(1000, 650), "Frags:0") { Font = BigFont };
+        private readonly AllmightyText t_frags = new AllmightyText(new Vector2DF(1000, 650), "Flags:0") { Font = BigFont };
         //難易度を表す文字を表示
         private readonly Difficulties t_easy = new Difficulties(new Vector2DF(1050, 200), "Easy", Dif.Easy);
         private readonly Difficulties t_normal = new Difficulties(new Vector2DF(1000, 270), "Normal", Dif.Normal);
@@ -111,7 +111,7 @@ namespace MineSweeper
                 uiLayer.DrawSpriteAdditionally(new Vector2DF(1010, 20), new Vector2DF(1220, 20), new Vector2DF(1220, 200), new Vector2DF(1010, 200), new Color(255, 255, 0), new Color(255, 255, 0), new Color(255, 255, 0), new Color(255, 255, 0), new Vector2DF(), new Vector2DF(), new Vector2DF(), new Vector2DF(), Textures["Back"], AlphaBlendMode.Add, -1);
             if (clearText.Layer != null)
                 uiLayer.DrawSpriteAdditionally(new Vector2DF(1010, 30), new Vector2DF(1250, 30), new Vector2DF(1250, 110), new Vector2DF(1010, 110), new Color(100, 255, 100), new Color(100, 255, 100), new Color(100, 255, 100), new Color(100, 255, 100), new Vector2DF(), new Vector2DF(), new Vector2DF(), new Vector2DF(), Textures["Back"], AlphaBlendMode.Add, -1);
-            t_frags.Text = "Frags:" + MainLayer.Objects.OfType<MObject>().Count(x => x.IsFragged);
+            t_frags.Text = "Flags:" + MainLayer.Objects.OfType<MObject>().Count(x => x.IsFragged);
             count++;
         }
         /// <summary>
